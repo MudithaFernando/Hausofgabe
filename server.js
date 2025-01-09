@@ -1,51 +1,26 @@
-import express from 'express';
-import cors from 'cors';
-import fs from 'fs';
+const express = require('express');
+const logger = require('./logger'); // Importiere den Logger
+const app = express();
+const port = 5001;
 
-
-
-const server = express();
-const PORT = 4000;
-
-// Middleware
-server.use(cors());
-server.use(express.json()); // Für das Verarbeiten von JSON-Daten
-
-
-// Hilfsfunktion zum Lesen der Todos aus der JSON-Datei
-const readTodos = () => {
-    const data = fs.readFileSync('todos.json'); // Lese die Datei synchron
-    return JSON.parse(data); // Parsen der JSON-Daten
-}
-
-// Hilfsfunktion zum Speichern der Todos in der JSON-Datei
-const saveTodos = (todos) => {
-    fs.writeFileSync('todos.json', JSON.stringify(todos, null, 2)); // Schreibe die Todos zurück in die Datei
-}
-
-// GET-Route für Todos
-server.get("/todos", (req, res) => {
-    const todos = readTodos(); // Lese Todos aus der Datei
-    res.json(todos);
+// Middleware für Logging
+app.use((req, res, next) => {
+  logger.info({ message: 'Request received', method: req.method, url: req.url });
+  next();
 });
 
-// POST-Route für neue Todos
-server.post("/todos", (req, res) => {
-    const newTodo = {
-        userId: 1, // Hier kannst du die Benutzer-ID dynamisch festlegen
-        id: Date.now(), // Eindeutige ID generieren (hier basierend auf Zeitstempel)
-        title: req.body.title,
-        completed: false
-    };
-    
-    const todos = readTodos(); // Aktuelle Todos aus der Datei lesen
-    todos.push(newTodo); // Neues Todo hinzufügen
-    saveTodos(todos); // Todos in der Datei speichern
-    
-    res.status(201).json(newTodo); // Antwort mit neuem Todo
+// Endpunkte
+app.get('/hello', (req, res) => {
+  res.status(200).send('Hello, World!');
+  logger.info('Hello endpoint was called');
 });
 
+app.get('/error', (req, res) => {
+  res.status(404).send('Not Found');
+  logger.warn('Error endpoint was called');
+});
 
-
-console.log("Server Online")
-server.listen(PORT)
+// Server starten
+app.listen(port, () => {
+  logger.info(`Server running at http://localhost:${port}`);
+});

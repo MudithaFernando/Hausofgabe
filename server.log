@@ -1,0 +1,11 @@
+{"level":"info","message":"Server running at http://localhost:5001","timestamp":"2025-01-09T15:01:15.997Z"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:01:32.520Z","url":"/"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:01:37.737Z","url":"/"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:01:37.972Z","url":"/"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:46:54.038Z","url":"/"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:46:54.258Z","url":"/"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:47:31.732Z","url":"/hello"}
+{"level":"info","message":"Hello endpoint was called","timestamp":"2025-01-09T15:47:31.743Z"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:51:10.045Z","url":"/erro"}
+{"level":"info","message":"Request received","method":"GET","timestamp":"2025-01-09T15:51:21.135Z","url":"/hello"}
+{"level":"info","message":"Hello endpoint was called","timestamp":"2025-01-09T15:51:21.137Z"}
